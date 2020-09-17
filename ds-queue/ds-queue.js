@@ -26,6 +26,7 @@ var Queue = function() {
   this._size = 0;
   this._deleteCount = 0;
 };
+
 // 배열의 뒤에 새로운 데이터가 저장되는것
 Queue.prototype.add = function(el) {
   this._storage[this._size] = el;
@@ -34,18 +35,14 @@ Queue.prototype.add = function(el) {
 
 //가장 먼저들어온 데이터가 삭제된다.
 Queue.prototype.remove = function() {
-  let head = this._storage[0];
-  if (this._size === 1) {
-    this._storage = {};
-    this._size--;
-    return head;
+  if (this._size === 0) {
+    return undefined;
   }
-
   let deleted = this._storage[this._deleteCount];
   delete this._storage[this._deleteCount];
   this._deleteCount++;
   return deleted;
 };
 
-let q = new Queue();
+// let q = new Queue();
 module.exports = Queue;

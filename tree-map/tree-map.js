@@ -50,24 +50,45 @@ Tree.prototype.addChild = function(value) {
 Tree.prototype.map = function(callback) {
   // your code here
   // 새로운 함수의 리턴값을 루트 노드로 대입.
+  // 해야 할것 : 기존 트리가 가지고 있던 노드들 2배하고, 새로운 트리에 추가하고, .
+  // 자식이 존재한다면. 자식들의 값을 바꾸자.
+  // 반복문을 사용해서, 모든 자식들을 순회한다.
+  //새로운 트리에다가 map을 적용한 밸류값을 대입
+  // callback은 함수 !!
+
   let newTree = new Tree(callback(this.value));
 
   if (this.children.length === 0) {
     return newTree;
-  }
-  // 해야 할것 : 기존 트리가 가지고 있던 노드들 2배하고, 새로운 트리에 추가하고, .
-  // 자식이 존재한다면. 자식들의 값을 바꾸자.
-  if (this.children.length > 0) {
-    // 반복문을 사용해서, 모든 자식들을 순회한다.
-    for (let i = 0; i < this.children.length; i++) {
-      //새로운 트리에다가 map을 적용한 밸류값을 대입
-      // let doubledVal = callback(this.children[i].value);
-      // newTree.addChild(doubledVal);
-      newTree.children.push(this.children[i].map(callback));
-    }
+  } else if (this.children.length > 0) {
+    this.children.forEach(function(children) {
+      newTree.children.push(children.map(callback));
+    });
   }
   return newTree;
 };
+
+// Tree.prototype.map = function(callback) {
+//   // your code here
+//   // 새로운 함수의 리턴값을 루트 노드로 대입.
+//   let newTree = new Tree(callback(this.value));
+
+//   if (this.children.length === 0) {
+//     return newTree;
+//   }
+//   // 해야 할것 : 기존 트리가 가지고 있던 노드들 2배하고, 새로운 트리에 추가하고, .
+//   // 자식이 존재한다면. 자식들의 값을 바꾸자.
+//   if (this.children.length > 0) {
+//     // 반복문을 사용해서, 모든 자식들을 순회한다.
+//     for (let i = 0; i < this.children.length; i++) {
+//       //새로운 트리에다가 map을 적용한 밸류값을 대입
+//       // let doubledVal = callback(this.children[i].value);
+//       // newTree.addChild(doubledVal);
+//       newTree.children.push(this.children[i].map(callback));
+//     }
+//   }
+//   return newTree;
+// };
 
 // let a = new Tree(1);
 
